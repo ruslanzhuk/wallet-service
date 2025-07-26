@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mnemonic Phrase{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h2>🧠 Відновлювальна фраза (Mnemonic)</h2>
+
+        {% if error is defined %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% else %}
+        <p><strong>Повна фраза:</strong></p>
+            <div class="alert alert-success">
+                {{ mnemonic }}
+            </div>
+
+            <p><strong>По словам:</strong></p>
+            <ol>
+                {% for word in words %}
+                    <li>{{ word }}</li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+{% endblock %}
