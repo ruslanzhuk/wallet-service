@@ -1,9 +1,67 @@
-{% extends 'base.html.twig' %}
+{% extends 'wallet/wallet_base.html.twig' %}
 
 {% block title %}Mnemonic Phrase{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            background-color: #0a1a2b;
+            color: #cbd5e1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            background-color: #1a2a4a;
+            padding: 2rem 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.8);
+            max-width: 900px;
+            margin-top: 3rem !important;
+        }
+
+        h2 {
+            color: #d0d9f9;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .alert {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .alert-success {
+            background-color: #2a3b6f;
+            color: #a9c3ff;
+            border: 1px solid #3b4e93;
+            box-shadow: 0 0 6px #2b3e71;
+            user-select: all;
+        }
+
+        .alert-danger {
+            background-color: #7a1a1a;
+            color: #ffb3b3;
+            border: 1px solid #9c2b2b;
+            box-shadow: 0 0 6px #6b1a1a;
+        }
+
+        ol {
+            margin-top: 1rem;
+            padding-left: 1.8rem;
+        }
+
+        ol li {
+            padding: 0.4rem 0;
+            font-size: 1.1rem;
+            color: #acbbd9;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <div class="container mt-5">
+    <div class="container">
         <h2>🧠 Відновлювальна фраза (Mnemonic)</h2>
 
         {% if error is defined %}
@@ -11,7 +69,7 @@
                 {{ error }}
             </div>
         {% else %}
-        <p><strong>Повна фраза:</strong></p>
+            <p><strong>Повна фраза:</strong></p>
             <div class="alert alert-success">
                 {{ mnemonic }}
             </div>

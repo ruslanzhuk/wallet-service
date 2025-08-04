@@ -1,11 +1,13 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
+        "ext-gmp": "*",
+        "ext-grpc": "*",
         "ext-iconv": "*",
         "ext-openssl": "*",
         "bitwasp/bitcoin": "^0.0.35",
@@ -16,8 +18,13 @@
         "doctrine/orm": "^3.5",
         "furqansiddiqui/bip32-keypair-php": "^0.4.0",
         "furqansiddiqui/bip39-mnemonic-php": "^0.2.1",
+        "google/protobuf": "^4.31",
+        "grpc/grpc": "^1.74",
         "kornrunner/keccak": "^1.1",
         "simplito/elliptic-php": "^1.0",
+        "spiral/roadrunner": "^2025.1",
+        "spiral/roadrunner-grpc": "^3.5",
+        "symfony/asset": "6.4.*",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
         "symfony/flex": "^2",
@@ -32,8 +39,7 @@
         "tuupola/base58": "^2.1",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "web3p/web3.php": "^0.3.2",
-        "ext-gmp": "*"
+        "web3p/web3.php": "^0.3.2"
     },
     "config": {
         "allow-plugins": {
@@ -45,7 +51,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Grpc\\": "src/Grpc"
         }
     },
     "autoload-dev": {

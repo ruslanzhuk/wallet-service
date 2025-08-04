@@ -21,7 +21,7 @@ class Wallet
     private ?string $private_key = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $mnemonic_path = null;
+    private ?string $mnemonic_phrase = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -58,14 +58,14 @@ class Wallet
         return $this;
     }
 
-    public function getMnemonicPath(): ?string
+    public function getMnemonicPhrase(): ?string
     {
-        return $this->mnemonic_path;
+        return $this->mnemonic_phrase;
     }
 
-    public function setMnemonicPath(?string $mnemonic_path): static
+    public function setMnemonicPhrase(?string $mnemonic_path): static
     {
-        $this->mnemonic_path = $mnemonic_path;
+        $this->mnemonic_phrase = $mnemonic_path;
 
         return $this;
     }

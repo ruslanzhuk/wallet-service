@@ -8,7 +8,6 @@ class MnemonicManager
 {
 
     public function __construct(
-        private string $mnemonicDir,
         private string $encryptionKey,
         private WalletRepository $walletRepository,
     )
@@ -23,13 +22,7 @@ class MnemonicManager
             throw new \RuntimeException('Wallet not found');
         }
 
-        $filePath = $this->mnemonicDir . '/' . $wallet->getMnemonicPath();
-
-        if (!file_exists($filePath)) {
-            throw new \RuntimeException('Mnemonic file not found');
-        }
-
-        $encryptedMnemonic = file_get_contents($filePath);
+        $encryptedMnemonic = $wallet->getMnemonicPhrase();
         $ivector = substr(hash('sha256', $this->encryptionKey), 0, 16);
 
         $decrypted = openssl_decrypt(

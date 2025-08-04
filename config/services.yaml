@@ -26,10 +26,13 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Handler\WalletServiceHandler:
+        arguments:
+            $walletService: '@App\Service\WalletService'
 
     App\Manager\MnemonicManager:
         arguments:
-            $mnemonicDir: '%kernel.project_dir%/var/mnemonics'
+#            $mnemonicDir: '%kernel.project_dir%/var/mnemonics'
             $encryptionKey: '%encryption_key%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

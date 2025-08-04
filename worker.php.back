@@ -1,0 +1,19 @@
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Spiral\RoadRunner\Worker;
+use Spiral\RoadRunner\GRPC\Server;
+use Spiral\RoadRunner\GRPC\Invoker;            // додай імпорт Invoker
+use Wallet\WalletServiceHandler;
+use Wallet\WalletServiceInterface;
+use App\Service\WalletService;
+
+$worker = Worker::create();
+$invoker = new Invoker($worker);                // створюємо інвокер з воркером
+
+$server = new Server($invoker);                  // передаємо інвокер, а не воркер
+
+$server->registerService(WalletServiceInterface::class, new WalletServiceHandler());
+
+$server->serve();

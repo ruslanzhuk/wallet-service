@@ -1,0 +1,13 @@
+version: "3"
+
+rpc:
+  listen: tcp://127.0.0.1:6001
+
+server:
+  command: "php bin/console grpc:serve"
+  relay: "pipes"
+
+grpc:
+  listen: "tcp://0.0.0.0:50051"
+  proto:
+    - "protos/wallet.proto"

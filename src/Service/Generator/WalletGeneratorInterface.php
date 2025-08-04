@@ -7,6 +7,4 @@ use App\Dtos\WalletDataDTO;
 interface WalletGeneratorInterface
 {
     public function generate(): WalletDataDTO;
-
-    public function calculatePK(string $publicKeyHex): string;
 }

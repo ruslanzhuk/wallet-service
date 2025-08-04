@@ -42,19 +42,4 @@ class WalletApiController extends AbstractController
             return $this->json(['error' => 'Internal server error'], 500);
         }
     }
-
-    #[Route('/api/calculate/public_key', name: 'public_key_wallet', methods: ['GET'])]
-    public function calculateRealPK(Request $request): Response
-    {
-        $data = $request->query->all();
-        if (!isset($data["network"]) || !isset($data["privateKey"])) {
-            return $this->json(['error' => 'network and privateKey required'], 400);
-        }
-        $address = $this->walletService->calculateRealPublicKey($data);
-
-        return $this->json([
-            'public_address' => $address,
-            "private_key" => $data["privateKey"],
-        ], 200);
-    }
 }

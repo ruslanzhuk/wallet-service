@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option php_namespace = "Grpc\\Wallet";
+option php_metadata_namespace = "Grpc\\GPBMetadata";
+
+package wallet;
+
+service WalletService {
+  rpc GenerateWallet (GenerateWalletRequest) returns (GenerateWalletResponse);
+}
+
+message GenerateWalletRequest {
+  string network = 1;
+}
+
+message GenerateWalletResponse {
+  string public_address = 1;
+  string private_key = 2;
+  string network = 3;
+  string mnemonic = 4;
+}

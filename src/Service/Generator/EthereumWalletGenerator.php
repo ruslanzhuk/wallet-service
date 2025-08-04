@@ -73,17 +73,11 @@ class EthereumWalletGenerator implements WalletGeneratorInterface
             substr(hash('sha256', $this->encryptionKey), 0, 16)
         );
 
-        if (!is_dir($this->mnemonicDir)) {
-            mkdir($this->mnemonicDir, 0700, true);
-        }
-        $filename = uniqid('wallet_', true) . '.txt';
-        file_put_contents($this->mnemonicDir . '/' . $filename, $encryptedMnemonic, 0600);
-
         return new WalletDataDTO(
             address: $address,
             privateKey: $privateKeyHex,
             network: 'ETH',
-            mnemonic: $filename
+            mnemonic: $encryptedMnemonic
         );
     }
 

@@ -33,18 +33,11 @@ class WalletService
         $wallet->setPrivateKey($walletData->privateKey);
         $wallet->setNetworkId($this->networkRepository->findOneBy(['code' => $walletData->network]));
         $wallet->setCreatedAt(new \DateTimeImmutable());
-        $wallet->setMnemonicPath($walletData->mnemonic);
+        $wallet->setMnemonicPhrase($walletData->mnemonic);
 
         $this->em->persist($wallet);
         $this->em->flush();
 
         return $walletData;
-    }
-
-    public function calculateRealPublicKey($data): string {
-        $generator = $this->resolver->resolve($data["network"]);
-
-        $data = $generator->calculatePK($data["privateKey"]);
-        return $data;
     }
 }

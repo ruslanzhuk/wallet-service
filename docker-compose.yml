@@ -3,16 +3,41 @@ version: '3.8'
 services:
   wallet-postgres:
     image: postgres:15
-    container_name: wallet-postgres
+    container_name: wallet-postgres-new
     restart: always
     environment:
       POSTGRES_USER: wallet_user
       POSTGRES_PASSWORD: secretpass
       POSTGRES_DB: wallet_db
     ports:
-      - "5434:5432"
+      - "5435:5432"  # external port 5435 run on 5432 of the container
     volumes:
       - wallet_postgres_data:/var/lib/postgresql/data
+    networks:
+      - crypto_gateway_app-network
+
+  wallet-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wallet-service
+    depends_on:
+      - wallet-postgres
+    ports:
+      - "50051:50051" # gRPC port
+      - "8001:8000"
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: "pgsql://wallet_user:secretpass@wallet-postgres:5432/wallet_db"
+    volumes:
+      - .:/var/www/wallet-service
+    networks:
+      - crypto_gateway_app-network
 
 volumes:
   wallet_postgres_data:
+
+
+networks:
+  crypto_gateway_app-network:
+    external: true
